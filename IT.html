@@ -42,7 +42,6 @@
             background-color: #FF5E00;
             background-image: radial-gradient(#000000 2px, transparent 2px);
             background-size: 30px 30px;
-            /* Transisi super smooth untuk ganti tema, ga bikin pusing */
             transition: background-color 0.8s ease, color 0.8s ease; 
         }
 
@@ -176,7 +175,7 @@
 
         /* Easter Egg Styling */
         #easter-egg-trigger {
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek membal mulus */
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); 
         }
         
         #options-btn:hover i {
@@ -198,16 +197,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" id="organogram-container">
             
             <div class="text-center mb-16 dimmable">
-                <!-- EASTER EGG WRAPPER -->
                 <div class="relative inline-flex items-center justify-center gap-4 mb-6 h-20">
-                    <!-- LOGO -->
-                    <!-- Miring awal 30 derajat -->
                     <div id="easter-egg-trigger" style="transform: rotate(30deg);" class="inline-flex items-center justify-center gap-3 bg-neoWhite text-neoBlack px-6 py-2 border-4 border-neoOrange shadow-neo-sm cursor-pointer select-none z-20">
                         <i class="fa-solid fa-code text-xl"></i>
                         <span class="font-black text-xl uppercase">Ekskul<span class="text-neoOrange">IT</span></span>
                     </div>
                     
-                    <!-- HIDDEN OPTION BUTTON -->
                     <button id="options-btn" class="absolute -right-16 bg-neoBlack text-neoWhite border-4 border-neoBlack w-12 h-12 flex items-center justify-center shadow-neo-sm opacity-0 scale-0 pointer-events-none transition-all duration-500 hover:bg-neoOrange hover:text-neoBlack z-10">
                         <i class="fa-solid fa-gear text-xl"></i>
                     </button>
@@ -222,7 +217,11 @@
             <div class="flex flex-col md:flex-row gap-8 md:gap-24 w-full justify-center relative z-10 mb-16">
                 <div class="group bg-neoLime border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Sistem terpantau aman. Saya Yusuf Effendi, Pembina Ekskul IT. Teruslah berkarya dan berinovasi tanpa batas.">
                     <div class="flex flex-col items-center">
-                        <div class="w-24 h-24 mb-5 avatar-box bg-neoWhite text-neoBlack text-3xl overflow-hidden group-hover:scale-110 transition-transform duration-300">YE</div>
+                        <div class="w-24 h-24 mb-5 avatar-box bg-neoWhite text-neoBlack text-3xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                            <span class="absolute inset-0 flex items-center justify-center z-0">YE</span>
+                            <!-- Isi link di dalam src="", biarkan kosong kalau belum ada foto -->
+                            <img src="" alt="Yusuf Effendi" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'">
+                        </div>
                         <h4 class="text-2xl font-black text-center mb-3 uppercase">Bpk. Yusuf Effendi</h4>
                         <span class="px-5 py-1 bg-neoWhite border-2 border-neoBlack font-black text-sm uppercase shadow-neo-sm transform -rotate-2">Pembina</span>
                         <div class="dialog-box mt-6 pt-4 border-t-4 border-neoBlack w-full text-left">
@@ -236,7 +235,10 @@
 
                 <div class="group bg-neoCyan border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Halo tim! Kak Muchlis di sini. Siap ngebantu kalian memecahkan algoritma dan bug yang membandel. Keep coding!">
                     <div class="flex flex-col items-center">
-                        <div class="w-24 h-24 mb-5 avatar-box bg-neoWhite text-neoBlack text-3xl overflow-hidden group-hover:scale-110 transition-transform duration-300">KM</div>
+                        <div class="w-24 h-24 mb-5 avatar-box bg-neoWhite text-neoBlack text-3xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                            <span class="absolute inset-0 flex items-center justify-center z-0">KM</span>
+                            <img src="" alt="Kak Muchlis" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'">
+                        </div>
                         <h4 class="text-2xl font-black text-center mb-3 uppercase">Kak Muchlis</h4>
                         <span class="px-5 py-1 bg-neoWhite border-2 border-neoBlack font-black text-sm uppercase shadow-neo-sm transform rotate-2">Pelatih</span>
                         <div class="dialog-box mt-6 pt-4 border-t-4 border-neoBlack w-full text-left">
@@ -263,7 +265,8 @@
                     <div class="group bg-neoYellow border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Akses diterima. Halo, saya Idris. Lead System Admin. Mari bereksperimen dan bangun arsitektur digital yang inovatif bersama-sama.">
                         <div class="flex flex-col items-center">
                             <div class="w-20 h-20 mb-4 avatar-box bg-neoWhite text-neoBlack text-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
-                                <img src="https://iili.io/CpNhsaV.jpg" onerror="this.onerror=null; this.src='https://freeimage.host/i/CpNhsaV';" alt="Muhammad Idris" class="w-full h-full object-cover">
+                                <span class="absolute inset-0 flex items-center justify-center z-0">MI</span>
+                                <img src="https://iili.io/CpNhsaV.jpg" alt="Muhammad Idris" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'">
                             </div>
                             <h4 class="text-xl font-black text-center mb-4 uppercase">Muhammad Idris</h4>
                             <span class="bg-neoCyan border-2 border-neoBlack px-6 py-1 font-black uppercase shadow-neo-sm transform -rotate-3 text-neoBlack">Ketua</span>
@@ -279,7 +282,10 @@
 
                     <div class="group bg-neoPink border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Halo! Aku Hasna. Memastikan seluruh algoritma ekskul dan program kerja kita berjalan mulus tanpa ada bug.">
                         <div class="flex flex-col items-center">
-                            <div class="w-20 h-20 mb-4 avatar-box bg-neoWhite text-neoBlack text-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">RH</div>
+                            <div class="w-20 h-20 mb-4 avatar-box bg-neoWhite text-neoBlack text-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                                <span class="absolute inset-0 flex items-center justify-center z-0">RH</span>
+                                <img src="" alt="Ratu Hasna Syakirah" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'">
+                            </div>
                             <h4 class="text-xl font-black text-center mb-4 uppercase">Ratu Hasna Syakirah</h4>
                             <span class="bg-neoLime border-2 border-neoBlack px-6 py-1 font-black uppercase shadow-neo-sm transform rotate-3 text-neoBlack">Wakil Ketua</span>
                             
@@ -296,7 +302,10 @@
                 <div class="flex flex-col md:flex-row gap-6 w-full justify-center flex-wrap relative z-10">
                     <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Data tersimpan. Ashafa di sini! Mengamankan setiap dokumentasi dan arsip penting ekstrakurikuler kita.">
                         <div class="flex flex-col items-center">
-                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">AQ</div>
+                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                                <span class="absolute inset-0 flex items-center justify-center z-0">AQ</span>
+                                <img src="https://freeimage.host/i/CpkdCl9" alt="Ashafa Queennara" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'">
+                            </div>
                             <h4 class="text-lg font-black text-center mb-4 uppercase">Ashafa Queennara</h4>
                             <span class="bg-neoPink border-2 border-neoBlack text-neoWhite px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform -rotate-2">Sekretaris 1</span>
                             <div class="dialog-box mt-4 pt-4 border-t-4 border-neoBlack w-full text-left">
@@ -309,7 +318,10 @@
 
                     <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Jasmine login. Siap membantu pencatatan dan pengelolaan informasi agar struktur data tetap rapi.">
                         <div class="flex flex-col items-center">
-                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">JA</div>
+                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                                <span class="absolute inset-0 flex items-center justify-center z-0">JA</span>
+                                <img src="" alt="Jasmine Azzahra Syabilansyah" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'">
+                            </div>
                             <h4 class="text-lg font-black text-center mb-4 uppercase leading-tight">Jasmine Azzahra Syabilansyah</h4>
                             <span class="bg-neoPink border-2 border-neoBlack text-neoWhite px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform rotate-1">Sekretaris 2</span>
                             <div class="dialog-box mt-4 pt-4 border-t-4 border-neoBlack w-full text-left">
@@ -322,7 +334,10 @@
 
                     <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Kas diamankan! Rasya memantau lalu lintas finansial ekskul agar alokasi sumber daya kita optimal.">
                         <div class="flex flex-col items-center">
-                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">RS</div>
+                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                                <span class="absolute inset-0 flex items-center justify-center z-0">RS</span>
+                                <img src="" alt="Muhammad Rasya" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'">
+                            </div>
                             <h4 class="text-lg font-black text-center mb-4 uppercase">Muhammad Rasya</h4>
                             <span class="bg-neoYellow border-2 border-neoBlack text-neoBlack px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform rotate-2">Bendahara 1</span>
                             <div class="dialog-box mt-4 pt-4 border-t-4 border-neoBlack w-full text-left">
@@ -333,10 +348,12 @@
                         </div>
                     </div>
                     
-                    <!-- NEW: M. Rosyid Al Fajri PJ Dokumentasi -->
                     <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Kamera siap! Rosyid di sini. Siap mengabadikan setiap momen seru dan baris kode perjuangan tim kita.">
                         <div class="flex flex-col items-center">
-                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">MR</div>
+                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                                <span class="absolute inset-0 flex items-center justify-center z-0">MR</span>
+                                <img src="" alt="Muhammad Rosyid Al Fajri" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'">
+                            </div>
                             <h4 class="text-lg font-black text-center mb-4 uppercase leading-tight">Muhammad Rosyid Al Fajri</h4>
                             <span class="bg-neoLime border-2 border-neoBlack text-neoBlack px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform -rotate-1">PJ Dokumentasi</span>
                             <div class="dialog-box mt-4 pt-4 border-t-4 border-neoBlack w-full text-left">
@@ -355,7 +372,10 @@
                 <div class="flex flex-col md:flex-row gap-8 md:gap-20 w-full justify-center relative z-10">
                     <div class="group bg-slate-200 border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Data Demisioner 2024.">
                         <div class="flex flex-col items-center">
-                            <div class="w-20 h-20 mb-4 avatar-box bg-slate-800 text-neoWhite text-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">??</div>
+                            <div class="w-20 h-20 mb-4 avatar-box bg-slate-800 text-neoWhite text-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                                <span class="absolute inset-0 flex items-center justify-center z-0">??</span>
+                                <img src="" alt="Ketua 2024" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'">
+                            </div>
                             <h4 class="text-xl font-black text-center mb-4 uppercase">Ketua 2024</h4>
                             <span class="bg-slate-400 border-2 border-neoBlack px-6 py-1 font-black uppercase shadow-neo-sm transform -rotate-2">Ketua</span>
                         </div>
@@ -391,7 +411,6 @@
             </div>
             
             <div class="flex flex-col gap-4">
-                <!-- Theme Toggle Option -->
                 <div class="border-4 border-neoBlack p-4 flex justify-between items-center hover:bg-gray-100 cursor-pointer transition-colors group" id="hacker-toggle">
                     <div>
                         <h3 class="font-black uppercase text-lg group-hover:text-neoOrange transition-colors">Hacker Protocol</h3>
@@ -463,21 +482,17 @@
             
             if (logoClicks < 3) {
                 logoClicks++;
-                // Rumus: Awal 30 derajat, dikurangi 10 derajat per klik
                 let newRotation = 30 - (logoClicks * 10);
                 trigger.style.transform = `rotate(${newRotation}deg)`;
                 
                 if (logoClicks === 3) {
-                    // Kalo udah 3x klik (0 derajat) munculin tombol option
                     optionsBtn.classList.remove('opacity-0', 'scale-0', 'pointer-events-none');
                     optionsBtn.classList.add('opacity-100', 'scale-100');
                     
-                    // Efek bouncing lurus
                     setTimeout(() => { trigger.style.transform = 'rotate(0deg) scale(1.1)'; }, 150);
                     setTimeout(() => { trigger.style.transform = 'rotate(0deg) scale(1)'; }, 300);
                 }
             } else {
-                // Kalo udah lurus, cuma ngasih efek scale doang tiap diklik
                 trigger.style.transform = 'rotate(0deg) scale(0.95)';
                 setTimeout(() => { trigger.style.transform = 'rotate(0deg) scale(1)'; }, 150);
             }
@@ -509,15 +524,11 @@
                 playSfx('glitch');
                 toggleKnob.style.transform = 'translateX(24px)';
                 toggleTrack.classList.replace('bg-gray-300', 'bg-neoLime');
-                
-                // Tambahkan class mode hacker
                 document.body.classList.add('hacker-mode');
             } else {
                 playSfx('close');
                 toggleKnob.style.transform = 'translateX(0)';
                 toggleTrack.classList.replace('bg-neoLime', 'bg-gray-300');
-                
-                // Matikan mode hacker
                 document.body.classList.remove('hacker-mode');
             }
         });
@@ -556,9 +567,6 @@
         }
 
         const container = document.getElementById('organogram-container');
-        
-        // --- DI SINI LETAK PERBAIKANNYA --- 
-        // Mengubah selector agar hanya fokus ke kartu di dalam container
         const cards = document.querySelectorAll('#organogram-container .group');
 
         function closeAllCards() {
@@ -569,7 +577,6 @@
                 const t = c.querySelector('.dialog-text');
                 if (t) t.innerHTML = "";
             });
-            // Sedikit perbaikan tambahan agar kelas 'has-focus' selalu bersih
             if (container) {
                 container.classList.remove('has-focus');
             }
@@ -611,7 +618,6 @@
         });
 
         document.addEventListener('click', (e) => {
-            // Biar ga nge-close kalo klik didalam modal options
             if (!optionsPanel.contains(e.target) && e.target !== optionsBtn && !optionsBtn.contains(e.target)) {
                 closeAllCards();
             }
