@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekskul IT - Struktur Kepengurusan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:wght@700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neoOrange: '#FF5E00',
+                        neoYellow: '#FFD000',
+                        neoCyan: '#00F0FF',
+                        neoPink: '#FF007F',
+                        neoLime: '#CCFF00',
+                        neoWhite: '#FFFFFF',
+                        neoBlack: '#000000',
+                    },
+                    fontFamily: {
+                        mono: ['Space Mono', 'monospace'],
+                        sans: ['Work Sans', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neo-sm': '4px 4px 0px 0px rgba(0,0,0,1)',
+                        'neo': '8px 8px 0px 0px rgba(0,0,0,1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection {
+            background-color: #000;
+            color: #CCFF00;
+        }
+        
+        body {
+            background-color: #FF5E00;
+            background-image: radial-gradient(#000000 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+            color: #CCFF00;
+            border-bottom: 4px solid #000;
+            white-space: nowrap;
+            box-sizing: border-box;
+            padding: 8px 0;
+            z-index: 100;
+            position: relative;
+        }
+        .ticker-text {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            animation: ticker 25s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        .avatar-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0px 0px #000;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Spotlight Effect CSS */
+        .has-focus .group:not(.active-card) {
+            opacity: 0.15;
+            filter: grayscale(100%);
+            pointer-events: none;
+            transform: scale(0.95);
+        }
+        
+        /* Bikin elemen lain ikut blur saat mode fokus */
+        .has-focus .dimmable {
+            opacity: 0.15;
+            filter: grayscale(100%);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .active-card {
+            transform: scale(1.05) translateY(-10px) !important;
+            z-index: 50 !important;
+            box-shadow: 16px 16px 0px 0px #000000 !important;
+        }
+
+        .group {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dialog-box {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .active-card .dialog-box {
+            display: block;
+            opacity: 1;
+            animation: fadeInDown 0.3s forwards;
+        }
+
+        .typing-cursor::after {
+            content: '█';
+            animation: blink 1s step-end infinite;
+            color: #FF5E00;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Menambahkan panah otomatis untuk tab yang aktif */
+        .active-tab::before {
+            content: "> ";
+        }
+        .active-tab::after {
+            content: " <";
+        }
+    </style>
+</head>
+<body class="font-sans text-neoBlack antialiased overflow-x-hidden">
+
+    <div class="ticker-wrap">
+        <div class="ticker-text">
+            *** WELCOME TO EKSKUL IT MAINFRAME *** INOVASI TANPA BATAS *** MENCETAK DEVELOPER MASA DEPAN *** SYSTEM STATUS: ONLINE *** WELCOME TO EKSKUL IT MAINFRAME *** INOVASI TANPA BATAS *** MENCETAK DEVELOPER MASA DEPAN *** SYSTEM STATUS: ONLINE ***
+        </div>
+    </div>
+
+    <section id="struktur" class="py-12 relative overflow-hidden bg-neoWhite min-h-screen border-b-8 border-neoBlack">
+        
+        <div class="absolute top-10 left-10 text-9xl font-black text-neoBlack opacity-5 pointer-events-none tracking-tighter">ORG</div>
+        <div class="absolute bottom-10 right-10 text-9xl font-black text-neoBlack opacity-5 pointer-events-none tracking-tighter">TEAM</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" id="organogram-container">
+            
+            <div class="text-center mb-16 dimmable">
+                <div id="easter-egg-trigger" class="inline-flex items-center justify-center gap-3 mb-6 bg-neoWhite text-neoBlack px-6 py-2 border-4 border-neoOrange transform -rotate-2 shadow-neo-sm cursor-pointer transition-transform duration-300 select-none">
+                    <i class="fa-solid fa-code text-xl"></i>
+                    <span class="font-black text-xl uppercase">Ekskul<span class="text-neoOrange">IT</span></span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4">
+                    Struktur Kepengurusan
+                </h1>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8 md:gap-24 w-full justify-center relative z-10 mb-16">
+                <div class="group bg-neoLime border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Sistem terpantau aman. Saya Yusuf Effendi, Pembina Ekskul IT. Teruslah berkarya dan berinovasi tanpa batas.">
+                    <div class="flex flex-col items-center">
+                        <div class="w-24 h-24 mb-5 avatar-box bg-neoWhite text-neoBlack text-3xl overflow-hidden group-hover:scale-110 transition-transform duration-300">YE</div>
+                        <h4 class="text-2xl font-black text-center mb-3 uppercase">Bpk. Yusuf Effendi</h4>
+                        <span class="px-5 py-1 bg-neoWhite border-2 border-neoBlack font-black text-sm uppercase shadow-neo-sm transform -rotate-2">Pembina</span>
+                        
+                        <div class="dialog-box mt-6 pt-4 border-t-4 border-neoBlack w-full text-left">
+                            <div class="bg-neoBlack text-neoWhite p-4 font-mono text-sm border-2 border-neoLime relative">
+                                <span class="absolute -top-3 left-2 bg-neoLime text-neoBlack px-2 text-xs font-bold border-2 border-neoBlack">ADVISOR_LOG</span>
+                                <p class="dialog-text typing-cursor"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-neoCyan border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Halo tim! Kak Muchlis di sini. Siap ngebantu kalian memecahkan algoritma dan bug yang membandel. Keep coding!">
+                    <div class="flex flex-col items-center">
+                        <div class="w-24 h-24 mb-5 avatar-box bg-neoWhite text-neoBlack text-3xl overflow-hidden group-hover:scale-110 transition-transform duration-300">KM</div>
+                        <h4 class="text-2xl font-black text-center mb-3 uppercase">Kak Muchlis</h4>
+                        <span class="px-5 py-1 bg-neoWhite border-2 border-neoBlack font-black text-sm uppercase shadow-neo-sm transform rotate-2">Pelatih</span>
+                        
+                        <div class="dialog-box mt-6 pt-4 border-t-4 border-neoBlack w-full text-left">
+                            <div class="bg-neoBlack text-neoWhite p-4 font-mono text-sm border-2 border-neoCyan relative">
+                                <span class="absolute -top-3 left-2 bg-neoCyan text-neoBlack px-2 text-xs font-bold border-2 border-neoBlack">MENTOR_LOG</span>
+                                <p class="dialog-text typing-cursor"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mb-16 dimmable" id="tab-buttons-container">
+                <button class="tab-btn bg-neoWhite text-neoBlack border-4 border-neoBlack font-black uppercase px-4 py-2 shadow-neo-sm hover:bg-neoOrange hover:-translate-y-1 hover:shadow-neo transition-all" data-target="tab-2023">23/24</button>
+                <button class="tab-btn bg-neoWhite text-neoBlack border-4 border-neoBlack font-black uppercase px-4 py-2 shadow-neo-sm hover:bg-neoOrange hover:-translate-y-1 hover:shadow-neo transition-all" data-target="tab-2024">24/25</button>
+                <button class="tab-btn active-tab bg-neoOrange text-neoBlack border-4 border-neoBlack font-black uppercase px-4 py-2 shadow-neo hover:translate-y-1 transition-all" data-target="tab-2025">25/26</button>
+                <button class="tab-btn bg-neoWhite text-neoBlack border-4 border-neoBlack font-black uppercase px-4 py-2 shadow-neo-sm hover:bg-neoOrange hover:-translate-y-1 hover:shadow-neo transition-all" data-target="tab-2026">26/27</button>
+            </div>
+
+            <div id="tab-2025" class="tab-content block relative flex flex-col items-center space-y-16">
+                <div class="flex flex-col md:flex-row gap-8 md:gap-20 w-full justify-center relative z-10">
+                    <div class="group bg-neoYellow border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Akses diterima. Halo, saya Idris. Lead System Admin. Mari bereksperimen dan bangun arsitektur digital yang inovatif bersama-sama.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-20 h-20 mb-4 avatar-box bg-neoWhite text-neoBlack text-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                                <!-- Foto profil Muhammad Idris ditaruh di sini -->
+                                <img src="https://iili.io/CpNhsaV.jpg" onerror="this.onerror=null; this.src='https://freeimage.host/i/CpNhsaV';" alt="Muhammad Idris" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="text-xl font-black text-center mb-4 uppercase">Muhammad Idris</h4>
+                            <span class="bg-neoCyan border-2 border-neoBlack px-6 py-1 font-black uppercase shadow-neo-sm transform -rotate-3 text-neoBlack">Ketua</span>
+                            
+                            <div class="dialog-box mt-6 pt-4 border-t-4 border-neoBlack w-full text-left">
+                                <div class="bg-neoBlack text-neoWhite p-4 font-mono text-sm border-2 border-neoOrange relative">
+                                    <span class="absolute -top-3 left-2 bg-neoOrange text-neoBlack px-2 text-xs font-bold border-2 border-neoBlack">SYSTEM_DIALOG</span>
+                                    <p class="dialog-text typing-cursor"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group bg-neoPink border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Halo! Aku Hasna. Memastikan seluruh algoritma ekskul dan program kerja kita berjalan mulus tanpa ada bug.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-20 h-20 mb-4 avatar-box bg-neoWhite text-neoBlack text-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">RH</div>
+                            <h4 class="text-xl font-black text-center mb-4 uppercase">Ratu Hasna Syakirah</h4>
+                            <span class="bg-neoLime border-2 border-neoBlack px-6 py-1 font-black uppercase shadow-neo-sm transform rotate-3 text-neoBlack">Wakil Ketua</span>
+                            
+                            <div class="dialog-box mt-6 pt-4 border-t-4 border-neoBlack w-full text-left">
+                                <div class="bg-neoBlack text-neoWhite p-4 font-mono text-sm border-2 border-neoLime relative">
+                                    <span class="absolute -top-3 left-2 bg-neoLime text-neoBlack px-2 text-xs font-bold border-2 border-neoBlack">SYSTEM_DIALOG</span>
+                                    <p class="dialog-text typing-cursor"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 w-full justify-center flex-wrap relative z-10">
+                    <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Data tersimpan. Ashafa di sini! Mengamankan setiap dokumentasi dan arsip penting ekstrakurikuler kita.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">AQ</div>
+                            <h4 class="text-lg font-black text-center mb-4 uppercase">Ashafa Queennara</h4>
+                            <span class="bg-neoPink border-2 border-neoBlack text-neoWhite px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform -rotate-2">Sekretaris 1</span>
+                            <div class="dialog-box mt-4 pt-4 border-t-4 border-neoBlack w-full text-left">
+                                <div class="bg-neoBlack text-neoWhite p-3 font-mono text-xs border-2 border-neoWhite relative">
+                                    <p class="dialog-text typing-cursor"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Jasmine login. Siap membantu pencatatan dan pengelolaan informasi agar struktur data tetap rapi.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">JA</div>
+                            <h4 class="text-lg font-black text-center mb-4 uppercase leading-tight">Jasmine Azzahra S.</h4>
+                            <span class="bg-neoPink border-2 border-neoBlack text-neoWhite px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform rotate-1">Sekretaris 2</span>
+                            <div class="dialog-box mt-4 pt-4 border-t-4 border-neoBlack w-full text-left">
+                                <div class="bg-neoBlack text-neoWhite p-3 font-mono text-xs border-2 border-neoWhite relative">
+                                    <p class="dialog-text typing-cursor"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Kas diamankan! Rasya memantau lalu lintas finansial ekskul agar alokasi sumber daya kita optimal.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 mb-4 avatar-box bg-neoOrange text-neoBlack text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">RS</div>
+                            <h4 class="text-lg font-black text-center mb-4 uppercase">Rasya</h4>
+                            <span class="bg-neoYellow border-2 border-neoBlack text-neoBlack px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform rotate-2">Bendahara 1</span>
+                            <div class="dialog-box mt-4 pt-4 border-t-4 border-neoBlack w-full text-left">
+                                <div class="bg-neoBlack text-neoWhite p-3 font-mono text-xs border-2 border-neoWhite relative">
+                                    <p class="dialog-text typing-cursor"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-2024" class="tab-content hidden relative flex flex-col items-center space-y-16">
+                <div class="flex flex-col md:flex-row gap-8 md:gap-20 w-full justify-center relative z-10">
+                    <div class="group bg-slate-200 border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Data Demisioner 2024.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-20 h-20 mb-4 avatar-box bg-slate-800 text-neoWhite text-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">??</div>
+                            <h4 class="text-xl font-black text-center mb-4 uppercase">Ketua 2024</h4>
+                            <span class="bg-slate-400 border-2 border-neoBlack px-6 py-1 font-black uppercase shadow-neo-sm transform -rotate-2">Ketua</span>
+                        </div>
+                    </div>
+                    <div class="group bg-slate-200 border-4 border-neoBlack p-6 w-full md:w-80 shadow-neo cursor-pointer" data-dialog="Data Demisioner 2024.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-20 h-20 mb-4 avatar-box bg-slate-800 text-neoWhite text-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">??</div>
+                            <h4 class="text-xl font-black text-center mb-4 uppercase">Wakil 2024</h4>
+                            <span class="bg-slate-400 border-2 border-neoBlack px-6 py-1 font-black uppercase shadow-neo-sm transform rotate-2">Wakil Ketua</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row gap-6 w-full justify-center flex-wrap relative z-10">
+                    <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Divisi Web Dev aktif.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 mb-4 avatar-box bg-slate-800 text-neoWhite text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">WD</div>
+                            <h4 class="text-lg font-black text-center mb-4 uppercase">Nama PJ Web</h4>
+                            <span class="bg-neoOrange border-2 border-neoBlack text-neoBlack px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform -rotate-2">PJ Web Dev</span>
+                        </div>
+                    </div>
+                    <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Divisi Desain aktif.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 mb-4 avatar-box bg-slate-800 text-neoWhite text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">DS</div>
+                            <h4 class="text-lg font-black text-center mb-4 uppercase">Nama PJ Desain</h4>
+                            <span class="bg-neoOrange border-2 border-neoBlack text-neoBlack px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform rotate-1">PJ Desain</span>
+                        </div>
+                    </div>
+                    <div class="group bg-neoWhite border-4 border-neoBlack p-5 w-full md:w-64 shadow-neo cursor-pointer" data-dialog="Divisi Jaringan aktif.">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 mb-4 avatar-box bg-slate-800 text-neoWhite text-xl overflow-hidden group-hover:scale-110 transition-transform duration-300">JR</div>
+                            <h4 class="text-lg font-black text-center mb-4 uppercase">Nama PJ Jaringan</h4>
+                            <span class="bg-neoOrange border-2 border-neoBlack text-neoBlack px-3 py-1 font-black text-xs uppercase shadow-neo-sm transform -rotate-1">PJ Jaringan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-2023" class="tab-content hidden relative flex flex-col items-center py-10">
+                <p class="font-mono font-bold border-2 border-neoBlack p-4 bg-neoLime shadow-neo-sm">>>> DATA PERIODE 2023/2024 BELUM DIMUAT <<<</p>
+            </div>
+            <div id="tab-2026" class="tab-content hidden relative flex flex-col items-center py-10">
+                <p class="font-mono font-bold border-2 border-neoBlack p-4 bg-neoCyan shadow-neo-sm">>>> MENUNGGU REGENERASI PENGURUS BARU <<<</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-neoBlack text-neoWhite py-8">
+        <div class="max-w-7xl mx-auto text-center font-mono font-bold text-sm">
+            <p>&copy; <span id="year"></span> SISTEM INFORMASI EKSKUL IT.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Reset styling ke pasif
+                tabBtns.forEach(b => {
+                    b.classList.remove('bg-neoOrange', 'shadow-neo', 'translate-y-0', 'active-tab');
+                    b.classList.add('bg-neoWhite', 'shadow-neo-sm');
+                });
+                
+                // Hide all
+                tabContents.forEach(c => c.classList.add('hidden'));
+                
+                // Active styling
+                btn.classList.remove('bg-neoWhite', 'shadow-neo-sm');
+                btn.classList.add('bg-neoOrange', 'shadow-neo', 'active-tab');
+                
+                const targetId = btn.getAttribute('data-target');
+                document.getElementById(targetId).classList.remove('hidden');
+                
+                closeAllCards();
+            });
+        });
+
+        // Audio System (SFX)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSfx(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            if (type === 'click') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'close') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.15);
+                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + 0.15);
+            }
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+        }
+
+        // Typewriter Effect
+        let typingTimeout;
+        function typeWriter(element, text, i = 0) {
+            if (i === 0) element.innerHTML = "";
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                typingTimeout = setTimeout(() => typeWriter(element, text, i + 1), 40);
+            }
+        }
+
+        const container = document.getElementById('organogram-container');
+        const cards = document.querySelectorAll('.group');
+
+        function closeAllCards() {
+            let wasActive = false;
+            cards.forEach(c => {
+                if(c.classList.contains('active-card')) wasActive = true;
+                c.classList.remove('active-card');
+                const t = c.querySelector('.dialog-text');
+                if (t) t.innerHTML = "";
+            });
+            if (container && wasActive) {
+                container.classList.remove('has-focus');
+                playSfx('close');
+                clearTimeout(typingTimeout);
+            }
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                clearTimeout(typingTimeout);
+                
+                if (card.classList.contains('active-card')) {
+                    card.classList.remove('active-card');
+                    container.classList.remove('has-focus');
+                    playSfx('close');
+                    const textBox = card.querySelector('.dialog-text');
+                    if (textBox) textBox.innerHTML = "";
+                } else {
+                    cards.forEach(c => {
+                        c.classList.remove('active-card');
+                        const t = c.querySelector('.dialog-text');
+                        if (t) t.innerHTML = "";
+                    });
+                    
+                    card.classList.add('active-card');
+                    container.classList.add('has-focus');
+                    playSfx('click');
+                    
+                    const dialogScript = card.getAttribute('data-dialog');
+                    const textBox = card.querySelector('.dialog-text');
+                    if (textBox && dialogScript) {
+                        typeWriter(textBox, dialogScript);
+                    }
+                }
+            });
+        });
+
+        document.addEventListener('click', closeAllCards);
+    </script>
+</body>
+</html>
